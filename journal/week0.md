@@ -1,7 +1,7 @@
 # Week 0 — Billing and Architecture
 
 ## Conceptual Diagram
-Lays out absolute basics and approach to future design within implementation bias
+Lays out absolute basics and approach to future design without implementation bias
 https://lucid.app/lucidchart/3b3e77b7-68f9-4fdc-83e0-2649a4a439ea/edit?viewport_loc=-1053%2C-249%2C3593%2C1845%2C0_0&invitationId=inv_b5d63897-59f0-4cb0-9a92-8e9add0f6ede
 
 ## Logical Diagram
