@@ -39,8 +39,8 @@ import rollbar
 import rollbar.contrib.flask
 from flask import got_request_exception
 
-# 3rd Party Cognito -----
-from flask_awscognito import AWSCognitoAuthentication
+# Cognito -----
+from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
 
 # Configuring Logger to Use CloudWatch
 # LOGGER = logging.getLogger(__name__)
@@ -95,10 +95,11 @@ def init_rollbar():
     # send exceptions from `app` to rollbar, using flask's signal system.
     got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
 
-# 3rd Party Cognito Auth -----
-app.config['AWS_COGNITO_USER_POOL_ID'] = os.getenv('AWS_COGNITO_USER_POOL_ID')
-app.config['AWS_COGNITO_USER_POOL_CLIENT_ID'] = os.getenv('AWS_COGNITO_USER_POOL_CLIENT_ID')
-aws_auth = AWSCognitoAuthentication(app)
+cognito_jwt_token = CognitoJwtToken(
+  user_pool_id=os.getenv('AWS_COGNITO_USER_POOL_ID'),
+  user_pool_client_id=os.getenv('AWS_COGNITO_USER_POOL_CLIENT_ID'),
+  region=os.getenv('AWS_DEFAULT_REGION')
+)
 
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
@@ -160,10 +161,19 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 @xray_recorder.capture('activities_home')
-@aws_auth.authentication_required
 def data_home():
-  data = HomeActivities.run()
-  claims = aws_auth.claims
+  access_token = extract_access_token(request.headers)
+  try:
+      claims = cognito_jwt_token.verify(access_token)
+      #authenticated
+      app.logger.debug('authenticated')
+      data = HomeActivities.run(cognito_user_id=claims['username'])
+      #app.logger.debug(claims)
+  except TokenVerifyError as e:
+      app.logger.debug('unauthenticated')
+      data = HomeActivities.run()
+      #unauthenticated
+      
   
   return data, 200
 
