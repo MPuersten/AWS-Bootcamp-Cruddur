@@ -1,5 +1,7 @@
 from psycopg_pool import ConnectionPool
+import sys
 import os
+import re
 
 class Db:
   def __init__(self):
@@ -9,29 +11,43 @@ class Db:
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
 
-  def query_commit_id(self, sql, *kwargs):
+  def query_commit(self, sql, kwargs):
     print("SQL statement (commit with returning id) ---------------")
+
+    pattern = r"\bRETURNING\b"
+    is_returning_id = re.search(pattern, sql)
+
+    print ("STARTING******************************")
     try:
       conn = self.pool.connection()
       curr = conn.cursor()
       cur.execute(sql, kwargs)
-      returning_id = cur.fetchone()[0]
+
+      if is_returning_id:
+        returning_id = cur.fetchone()[0]
+
       conn.commit()
-      return returning_id
+      print ("SUCCESSFUL******************************")
+
+
+      if is_returning_id:
+        
+        return returning_id
     except Exception as err:
-      print_sql_err(err)
+      print ("ERROR******************************")
+      self.print_sql_err(err)
       # conn.rollback()
 
-  def query_commit(self, sql):
-    print("SQL statement (commit) ---------------")
-    try:
-      conn = self.pool.connection()
-      curr = conn.cursor()
-      cur.execute(sql)
-      conn.commit()
-    except Exception as err:
-      print_sql_err(err)
-      # conn.rollback()
+  # def query_commit(self, sql):
+  #   print("SQL statement (commit) ---------------")
+  #   try:
+  #     conn = self.pool.connection()
+  #     curr = conn.cursor()
+  #     cur.execute(sql)
+  #     conn.commit()
+  #   except Exception as err:
+  #     print_sql_err(err)
+  #     # conn.rollback()
 
   def query_object_json(self, sql):
     print("SQL statement (obj) ---------------")
