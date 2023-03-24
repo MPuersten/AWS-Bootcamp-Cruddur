@@ -2,52 +2,50 @@ from psycopg_pool import ConnectionPool
 import sys
 import os
 import re
+from flask import current_app as app
 
 class Db:
   def __init__(self):
     self.init_pool()
   
+  def template(self, name):
+    template_path = os.path.join(app.root_path, 'db', 'sql', name + '.sql')
+    with open(template_path, 'r') as f:
+      template_content = f.read()
+    return template_content
+
   def init_pool(self):
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
 
-  def query_commit(self, sql, kwargs):
-    print("SQL statement (commit with returning id) ---------------")
+  def print_sql(self, title, sql):
+    cyan = '\033[96m'
+    no_color = '\033[0m'
+    print('\n')
+    print(f'{cyan}SQL statement ({title}) ---------------{no_color}')
+    print(sql + '\n')
+
+  def query_commit(self, sql, params={}):
+    self.print_sql("commit with returning", sql)
+    print(params)
 
     pattern = r"\bRETURNING\b"
     is_returning_id = re.search(pattern, sql)
 
-    print ("STARTING******************************")
     try:
-      conn = self.pool.connection()
-      curr = conn.cursor()
-      cur.execute(sql, kwargs)
+      with self.pool.connection() as conn:
+        cur = conn.cursor()
+        cur.execute(sql, params)
 
-      if is_returning_id:
-        returning_id = cur.fetchone()[0]
+        if is_returning_id:
+          returning_id = cur.fetchone()[0]
+        conn.commit()
+        if is_returning_id:
+          return returning_id
 
-      conn.commit()
-      print ("SUCCESSFUL******************************")
-
-
-      if is_returning_id:
-        
-        return returning_id
     except Exception as err:
       print ("ERROR******************************")
       self.print_sql_err(err)
-      # conn.rollback()
-
-  # def query_commit(self, sql):
-  #   print("SQL statement (commit) ---------------")
-  #   try:
-  #     conn = self.pool.connection()
-  #     curr = conn.cursor()
-  #     cur.execute(sql)
-  #     conn.commit()
-  #   except Exception as err:
-  #     print_sql_err(err)
-  #     # conn.rollback()
 
   def query_object_json(self, sql):
     print("SQL statement (obj) ---------------")
@@ -88,5 +86,11 @@ class Db:
   def print_sql_err(self, err):
     err_type, err_obj, traceback = sys.exc_info()
     line_num = traceback.tb_lineno
+
+    print("\npsycopg ERROR:", err, "on line number: ", line_num)
+    print("psycopg traceback: ", traceback, "-- type:", err_type)
+
+    print("pgerror:", err.pgerror)
+    print("pgcode:", err.pgcode, "\n")
 
 db = Db()
