@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import os
+import sys
 import boto3
 from datetime import datetime, timedelta, timezone
 
@@ -16,6 +18,23 @@ if len(sys.argv) == 2:
   if "prod" in sys.argv[1]:
     attrs = {}
 dynamodb = boto3.client('dynamodb',**attrs)
+
+sql = """
+    SELECT 
+        users.uuid,
+        users.display_name,
+        users.handle
+    FROM users
+    WHERE users.handle IN (
+        %(my_handle)s,
+        %(other_handle)s
+    )
+"""
+params = {"my_handle": "andrewbrown", "other_handle": "bayko"}
+users = db.query_array_json(sql, params)
+
+print('users:')
+print(users)
 
 def create_message(client,message_group_uuid, created_at, message, my_user_uuid, my_user_display_name, my_user_handle):
     print('')
@@ -142,10 +161,10 @@ for i in range(len(lines)):
 
     created_at = (now + timedelta(minutes=i).isoformat())
     create_message(
-        client=ddb
-        message_grou_uuid=message_group_id
-        created_at=created_at
-        message=message
+        client=ddb,
+        message_grou_uuid=message_group_id,
+        created_at=created_at,
+        message=message,
         my_user_uuid=users[key]['uuid'],
         my_user_display_name=users[key]['display_name'],
         my_user_handle=users[key]['handle']

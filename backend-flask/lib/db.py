@@ -75,16 +75,14 @@ class Db:
         else:
           return json[0]
 
-  def query_array_json(self, sql, params={}):
-    self.print_sql("array", sql)
-    self.print_params(params)
+  def query_array_json(self,sql,params={}):
+    self.print_sql('array',sql)
     wrapped_sql = self.query_wrap_array(sql)
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
-        cur.execute(wrapped_sql)
+        cur.execute(wrapped_sql,params)
         json = cur.fetchone()
-        if json != None:
-          return json[0]
+        return json[0]
 
   def query_wrap_object(self, template):
     sql = f"""
