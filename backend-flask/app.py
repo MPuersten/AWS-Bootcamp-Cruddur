@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request
+from flask import request, after_this_request
 from flask_cors import CORS, cross_origin
 import os
 import sys
@@ -115,8 +115,10 @@ cors = CORS(
 # CloudWatch Logs -----
 # @app.after_request
 # def after_request(response):
-#     timestamp = strftime('[%Y-%b-%d %H:%M]')
-#     LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+#     app.logger.debug('RESPONSE HEADERS')
+#     app.logger.debug(response.headers)
+#     # timestamp = strftime('[%Y-%b-%d %H:%M]')
+#     # LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
 #     return response
 
 @app.route('/rollbar/test')
@@ -129,6 +131,8 @@ def data_message_groups():
   access_token = extract_access_token(request.headers)
   try:
       claims = cognito_jwt_token.verify(access_token)
+      print('OUTPUT')
+      print(claims)
       #authenticated
       app.logger.debug('authenticated')
       cognito_user_id = claims['sub']
@@ -139,10 +143,8 @@ def data_message_groups():
         return model['data'], 200
   except TokenVerifyError as e:
       app.logger.debug('unauthenticated')
-      data = HomeActivities.run()
+      return {}, 401
       #unauthenticated
-
-  
 
 @app.route("/api/messages/@<string:handle>", methods=['GET'])
 def data_messages(handle):
