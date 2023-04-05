@@ -1,0 +1,16 @@
+#! /usr/bin/bash
+
+# Check if the task ID is provided as an argument
+if [ -z "$1" ]; then
+  echo "Please provide a task ID as an argument"
+  exit 1
+fi
+
+# Run the aws ecs execute-command command with the provided task ID
+aws ecs execute-command \
+--region $AWS_DEFAULT_REGION \
+--cluster cruddur \
+--task $1 \
+--container backend-flask \
+--command "/bin/bash" \
+--interactive
