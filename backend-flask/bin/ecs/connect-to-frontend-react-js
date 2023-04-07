@@ -12,5 +12,5 @@ aws ecs execute-command \
 --cluster cruddur \
 --task $1 \
 --container "frontend-react-js" \
---command "/bin/bash" \
+--command "/bin/sh" \
 --interactive
