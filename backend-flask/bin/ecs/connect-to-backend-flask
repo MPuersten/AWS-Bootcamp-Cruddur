@@ -6,16 +6,11 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-if [ -z "$2" ]; then
-  echo "Please provide a container name as an argument"
-  exit 1
-fi
-
 # Run the aws ecs execute-command command with the provided task ID
 aws ecs execute-command \
 --region $AWS_DEFAULT_REGION \
 --cluster cruddur \
 --task $1 \
---container $2 \
+--container "backend-flask" \
 --command "/bin/bash" \
 --interactive
