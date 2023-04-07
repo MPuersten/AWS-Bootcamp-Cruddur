@@ -20,7 +20,7 @@
           ],
           "interval": 30,
           "timeout": 5,
-          "retires": 3
+          "retries": 3
         },
         "portMappings": [
           {
