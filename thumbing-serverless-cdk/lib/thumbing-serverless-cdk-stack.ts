@@ -7,12 +7,15 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     super(scope, id, props);
 
     const bucketName = process.env.THUMBING_BUCKET_NAME!;
+    const bucket = this.createBucket(bucketName);
   }
 
-  createBucket(bucketName: string) {
+  createBucket(bucketName: string): s3.Bucket {
     const bucket = new s3.Bucket(this, 'ThumbingBucket', {
       bucketName: bucketName,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
+
+    return bucket;
   }
 }

@@ -1,0 +1,2 @@
+#! /usr/bin/bash
+cdk bootstrap aws://$AWS_ACCOUNT_ID/$AWS_DEFAULT_REGION
