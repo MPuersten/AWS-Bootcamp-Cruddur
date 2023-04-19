@@ -3,6 +3,10 @@ import * as s3 from 'aws-cdk-lib/aws-s3'
 import * as lambda from 'aws-cdk-lib/aws-lambda'
 import { Construct } from 'constructs';
 
+// Load env variables
+const dotenv = require('dotenv')
+dotenv.config();
+
 export class ThumbingServerlessCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
