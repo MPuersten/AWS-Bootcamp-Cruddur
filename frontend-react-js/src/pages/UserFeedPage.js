@@ -7,7 +7,9 @@ import DesktopSidebar     from '../components/DesktopSidebar';
 import ActivityFeed from '../components/ActivityFeed';
 import ActivityForm from '../components/ActivityForm';
 import ProfileHeading from '../components/ProfileHeading';
-import { checkAuth, getAccessToken } from '../lib/CheckAuth'
+
+
+import {checkAuth, getAccessToken} from '../lib/CheckAuth';
 
 export default function UserFeedPage() {
   const [activities, setActivities] = React.useState([]);
@@ -21,8 +23,7 @@ export default function UserFeedPage() {
 
   const loadData = async () => {
     try {
-      console.log(params.handle);
-      const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/${params.handle}`
+      const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/@${params.handle}`
       const access_token = await getAccessToken();
       const res = await fetch(backend_url, {
         headers: {
@@ -32,10 +33,8 @@ export default function UserFeedPage() {
       });
       let resJson = await res.json();
       if (res.status === 200) {
-        console.log('JSON DATA.');
-        console.log(resJson);
-        setProfile(resJson.profile);
-        setActivities(resJson.activities);
+        setProfile(resJson.profile)
+        setActivities(resJson.activities)
       } else {
         console.log(res)
       }
@@ -58,8 +57,9 @@ export default function UserFeedPage() {
       <DesktopNavigation user={user} active={'profile'} setPopped={setPopped} />
       <div className='content'>
         <ActivityForm popped={popped} setActivities={setActivities} />
+
         <div className='activity_feed'>
-          <ProfileHeading setPoppedProfile={setPoppedProfile} profile={profile}/>
+          <ProfileHeading setPopped={setPoppedProfile} profile={profile} />
           <ActivityFeed activities={activities} />
         </div>
       </div>
