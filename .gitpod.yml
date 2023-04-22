@@ -11,6 +11,7 @@ tasks:
   - name: react-js
     command: |
       cd $THEIA_WORKSPACE_ROOT
+      ./bin/ecr/login
       ./bin/frontend/generate-env
       cd frontend-react-js
       npm i
