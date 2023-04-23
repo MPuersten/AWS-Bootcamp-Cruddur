@@ -29,10 +29,10 @@ class {klass}Migration(Migration):
     \"\"\"
     return data
   def migrate():
-    this.query_commit({klass}Migration.migrate_sql(),{{
+    db.query_commit({klass}Migration.migrate_sql(),{{
     }})
   def rollback():
-    this.query_commit({klass}Migration.rollback_sql(),{{
+    db.query_commit({klass}Migration.rollback_sql(),{{
     }})
 
 migration = AddBioColumnMigration
