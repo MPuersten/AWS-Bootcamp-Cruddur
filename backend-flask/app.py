@@ -15,7 +15,7 @@ from services.message_groups import *
 from services.messages import *
 from services.create_message import *
 from services.show_activity import *
-from servies.update_profile import *
+from services.update_profile import *
 
 # HoneyComb -----
 from opentelemetry import trace
@@ -319,7 +319,7 @@ def data_update_profile():
   try:
     claims = cognito_jwt_token.verify(access_token)
     cognito_user_id = claims['sub']
-    UpdateProfile.run(
+    model = UpdateProfile.run(
       cognito_user_id=cognito_user_id,
       bio=bio,
       display_name=display_name
