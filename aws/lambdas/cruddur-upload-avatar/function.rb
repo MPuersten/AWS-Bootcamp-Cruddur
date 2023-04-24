@@ -1,8 +1,9 @@
 require 'aws-sdk-s3'
 
-client = Aws::S3::Client.new
+s3 = Aws::S3::Resource.new
+bucket_name = ENV["UPLOADS_BUCKET_NAME"]
+object_key = 'mock.jpg'
 
-signer = Aws::S3::Presigner.new
-url, headers = signer.presigned_request(
-    :get_object, bucket: "bucket", key: "key"
-)
+obj = s3.bucket(bucket_name).object(object_key)
+url = obj.presigned_url(:put, expires_in: 3600)
+puts url
