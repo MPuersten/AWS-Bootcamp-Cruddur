@@ -43,14 +43,12 @@ export default function ProfileForm(props) {
     }
   }
   const s3upload = async (event)=> {
-    console.log('event',event)
     const file = event.target.files[0]
     const preview_image_url = URL.createObjectURL(file)
     console.log(file.name, file.size, file.type)
     const fileparts = file.name.split('.')
     const extension = fileparts[fileparts.length-1]
     const presignedurl = await s3uploadkey(extension)
-    console.log('presigned-url', presignedurl);
     try {
       console.log('s3upload')
       const res = await fetch(presignedurl, {
@@ -60,7 +58,7 @@ export default function ProfileForm(props) {
           'Content-Type': file.type
       }})
       if (res.status === 200) {
-        
+        console.log('upload successful.');
       } else {
         console.log(res)
       }
