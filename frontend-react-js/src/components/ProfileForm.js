@@ -21,6 +21,7 @@ export default function ProfileForm(props) {
       const json = {
         extension: extension
       }
+
       const res = await fetch(gateway_url, {
         method: "POST",
         body: JSON.stringify(json),
@@ -49,7 +50,7 @@ export default function ProfileForm(props) {
     const fileparts = file.name.split('.')
     const extension = fileparts[fileparts.length-1]
     const presignedurl = await s3uploadkey(extension)
-    console.log(presignedurl);
+    console.log('presigned-url', presignedurl);
     try {
       console.log('s3upload')
       const res = await fetch(presignedurl, {
