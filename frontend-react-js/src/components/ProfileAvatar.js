@@ -1,7 +1,8 @@
 import './ProfileAvatar.css';
 
 export default function ProfileAvatar(props) {
-  const backgroundImage = 'url("https://assets.cruddurmitchpuersten.ca/banners/banner.jpg")';
+  console.log('AVATAR-PROPS', props);
+  const backgroundImage = `url("https://assets.cruddurmitchpuersten.ca/avatars/${props.id}.jpg")`;
   const styles = {
     backgroundImage: backgroundImage,
     backgroundSize: 'cover',
