@@ -3,7 +3,7 @@
 - Application: Cruddur
 - Cohort: 2023-A1
 
-This is the starting codebase that will be used in the FREE AWS Cloud Project Bootcamp 2023
+This is forked from the starting codebase that will be used in the FREE AWS Cloud Project Bootcamp 2023
 
 ![Cruddur Graphic](_docs/assets/cruddur-banner.jpg)
 
@@ -12,6 +12,11 @@ This is the starting codebase that will be used in the FREE AWS Cloud Project Bo
 ## Instructions
 
 At the start of the bootcamp you need to create a new Github Repository from this template.
+
+## Required Environment Variables
+
+The following environment variables are required to run the Gitpod developer environment:
+- **_Coming Soon_**
 
 ## Journaling Homework
 
