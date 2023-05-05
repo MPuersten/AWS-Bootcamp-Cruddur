@@ -7,7 +7,7 @@ nav {
 nav .logo {
   width: 48px;
   height: 48px;
-  fill: rgb(149,0,255);
+  fill: rgb(255, 0, 64);
 }
 
 nav a.primary {
@@ -34,16 +34,16 @@ nav a.primary:hover .icon {
 }
 
 nav a.primary.active {
-  color: rgb(149,0,255) !important;
+  color: rgb(255, 0, 64) !important;
   font-weight: 600;
 }
 nav a.primary.active svg {
-  fill: rgb(149,0,255) !important;
+  fill: rgb(255, 0, 64) !important;
 }
 
 nav button.post {
   display: block;
-  background: rgba(149,0,255,1);
+  background: rgba(255, 0, 64,1);
   color: #fff;
   border: none;
   text-decoration: none;
