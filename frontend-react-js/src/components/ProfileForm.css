@@ -50,6 +50,6 @@ form.profile_form textarea:focus {
   border-radius: 4px;
   padding: 10px 20px;
   font-size: 16px;
-  background: rgba(149,0,255,1);
+  background: rgba(255, 0, 64,1);
   color: #fff;
 }

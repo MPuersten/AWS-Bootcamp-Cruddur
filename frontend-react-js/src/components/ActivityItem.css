@@ -40,9 +40,9 @@
 }
 
 .activity_item .activity_actions .action:hover {
-  background: rgba(149,0,255,0.2);
+  background: rgba(255, 0, 64,0.2);
 }
 
 .activity_item .activity_actions .action:hover .icon {
-  fill: rgb(149,0,255);
+  fill: rgb(255, 0, 64);
 }
