@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+# VPC
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock:
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      
+# IGW
+# Route Tables
+# Subnets
+# Subnet A
+# Subnet B
+# Subnet C
