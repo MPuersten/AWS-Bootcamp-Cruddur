@@ -3,9 +3,10 @@ set -e
 
 CFN_PATH="/workspace/AWS-Bootcamp-Cruddur/aws/cfn/template.yaml"
 
-cdn-lint CFN_PATH
+cfn-lint $CFN_PATH
 aws cloudformation deploy \
   --stack-name "my-cluster" \
+  --s3-bucket "cfn-artifacts-cruddurmitchpuersten" \
   --template-file $CFN_PATH \
   --no-execute-changeset \
   --capabilities CAPABILITY_NAMED_IAM
