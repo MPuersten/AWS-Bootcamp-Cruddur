@@ -3,6 +3,7 @@ set -e
 
 CFN_PATH="/workspace/AWS-Bootcamp-Cruddur/aws/cfn/template.yaml"
 
+cdn-lint CFN_PATH
 aws cloudformation deploy \
   --stack-name "my-cluster" \
   --template-file $CFN_PATH \
