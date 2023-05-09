@@ -8,4 +8,4 @@ export CFN_BUCKET='cfn-artifacts-cruddurmitchpuersten'
 gp env CFN_BUCKET='cfn-artifacts-cruddurmitchpuersten'
 ```
 
-Note that bucket names must be globally unique.
+Note that bucket names must be globally unique to be created.
