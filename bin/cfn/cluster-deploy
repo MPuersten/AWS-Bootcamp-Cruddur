@@ -1,7 +1,7 @@
 #! /usr/bin/bash
 set -e
 
-CFN_PATH="/workspace/AWS-Bootcamp-Cruddur/aws/cfn/networking/template.yaml"
+CFN_PATH="/workspace/AWS-Bootcamp-Cruddur/aws/cfn/cluster/template.yaml"
 echo $CFN_PATH
 
 cfn-lint $CFN_PATH

@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: |
+  Networking and cluster config required to run Fargate containers.
+  - ECS Fargate Cluster
+  - App Load Balancer (ALB)
+    - ipv4
+    - internet facing
+  - ALB security group
+  - HTTPS Listener
+    - naked domain to frontend TargetGroup
+    - send api subdomain to backend TargetGroup
+  - HTTP Listener
+    - redirects to HTTPS listener
+  - Backend TargetGroup
+  - Frontend Target Group
+
+Resources:
+  FargateCluster:
+    # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-cluster.html
+    Type: AWS::ECS:Cluster
+    Properties:
+      ClusterName: !Sub "${AWS::StackName}FargateCluster"
+      CapacityProviders:
+        - FARGATE
+      ClusterSettings:
+        - Name: containerInsights
+          Value: enabled
+      Configuration:
+        ExecuteCommandConfiguration:
+          # KmsKeyId: !Ref KmsKeyId
+          Logging: DEFAULT
+      ServiceConnectDefaults:
+        Namespace: cruddur
+
+  ALB:
+    # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub "${AWS::StackName}ALB"
+      Type: application
+      IpAddressType: ipv4
+      Scheme: internet-facing
+      SecurityGroups:
+        - !GetAtt ALBSG.GroupId
+      LoadBalancerAttributes:
+        - Key: routing.http2.enabled
+          Value: true
+        - Key: routing.http.preserve_host_header.enabled
+          Value: false
+        - Key: deletion_protection.enabled
+          Value: true
+        - Key: load_balancing.cross_zone.enabled
+          Value: true
+        - Key: access_logs.s3.enabled
+          Value: false
+        # Disable until we want to use logging
+        # - Name: access_logs.s3.bucket
+        #   Value: bucket-name
+        # - Name: access_logs.s3.prefix
+        #   Value: ""
+
+  HTTPSListener:
+    # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      Certificates:
+      DefaultActions:
+      LoadBalancerArn: !Ref ALB
+      Port: 443
