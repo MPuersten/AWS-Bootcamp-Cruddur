@@ -6,6 +6,7 @@ Description: |
   - App Load Balancer (ALB)
     - ipv4
     - internet facing
+    - certificate attached from Cerrtitifcation MAnager (AWS)
   - ALB security group
   - HTTPS Listener
     - naked domain to frontend TargetGroup
@@ -103,7 +104,7 @@ Resources:
       IpAddressType: ipv4
       Scheme: internet-facing
       SecurityGroups:
-        - !Ref ALBSG
+        - !GetAtt ALBSG.GroupId
       Subnets:
         Fn::Split:
           - ","
