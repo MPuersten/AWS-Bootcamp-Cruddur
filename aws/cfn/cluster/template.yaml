@@ -177,6 +177,9 @@ Resources:
     Properties:
       GroupName: !Sub "${AWS::StackName}AlbSG"
       GroupDescription: Public Facing SG for our Cruddur ALB
+      VpcId:
+        Fn::ImportValue:
+          !Sub ${NetworkingStack}VpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 443
