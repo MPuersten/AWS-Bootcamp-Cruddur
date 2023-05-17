@@ -1,0 +1,4 @@
+[deploy]
+bucket = 'cfn-artifacts-cruddurmitchpuersten'
+region = 'ca-central-1'
+stack_name = 'CrdSrvBackendFlask'
