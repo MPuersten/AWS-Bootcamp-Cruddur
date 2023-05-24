@@ -13,10 +13,6 @@ This is forked from the starting codebase that will be used in the FREE AWS Clou
 
 ![Cruddur Screenshot](_docs/assets/cruddur-screenshot.png)
 
-## Instructions
-
-At the start of the bootcamp you need to create a new Github Repository from this template.
-
 ## Required Environment Variables
 
 The following environment variables are required to run the Gitpod developer environment:
