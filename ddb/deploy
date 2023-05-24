@@ -2,7 +2,10 @@
 set -e
 
 PACKAGED_TEMPLATE_PATH="/workspace/AWS-Bootcamp-Cruddur/.aws-sam/build/packaged.yaml"
-CONFIG_PATH="/workspace/AWS-Bootcamp-Cruddur/aws/cfn/ddb/config.toml"
+CONFIG_PATH="/workspace/AWS-Bootcamp-Cruddur/ddb/config.toml"
+
+echo "- deploy"
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-deploy.html
 
 sam deploy \
   --template-file $PACKAGED_TEMPLATE_PATH  \
