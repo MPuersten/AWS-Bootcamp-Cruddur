@@ -2,7 +2,7 @@
 
 ## Mitch Puersten
 
-Frontend: ![](https://codebuild.ca-central-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidFRTQStZUjJ3SmM4NVFVZ0ZsUlNUQjhvZlVndkdZNDBUTGtzRzRwRWZIMDF0cHBicjJETU5KMENtSlV5SGQ2MFpwOXVOMDdoZDV3VU9EOVhrYjNtZGFRPSIsIml2UGFyYW1ldGVyU3BlYyI6IkxGSHFIUkNraTNTcS83Z0giLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
+![](https://codebuild.ca-central-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidFRTQStZUjJ3SmM4NVFVZ0ZsUlNUQjhvZlVndkdZNDBUTGtzRzRwRWZIMDF0cHBicjJETU5KMENtSlV5SGQ2MFpwOXVOMDdoZDV3VU9EOVhrYjNtZGFRPSIsIml2UGFyYW1ldGVyU3BlYyI6IkxGSHFIUkNraTNTcS83Z0giLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
 
 - Application: Cruddur
 - Cohort: 2023-A1
@@ -12,10 +12,6 @@ This is forked from the starting codebase that will be used in the FREE AWS Clou
 ![Cruddur Graphic](_docs/assets/cruddur-banner.jpg)
 
 ![Cruddur Screenshot](_docs/assets/cruddur-screenshot.png)
-
-## Instructions
-
-At the start of the bootcamp you need to create a new Github Repository from this template.
 
 ## Required Environment Variables
 

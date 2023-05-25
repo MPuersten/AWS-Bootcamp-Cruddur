@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+set -e
+
+PACKAGED_TEMPLATE_PATH="/workspace/AWS-Bootcamp-Cruddur/.aws-sam/build/packaged.yaml"
+CONFIG_PATH="/workspace/AWS-Bootcamp-Cruddur/ddb/config.toml"
+
+echo "- deploy"
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-deploy.html
+
+sam deploy \
+  --template-file $PACKAGED_TEMPLATE_PATH  \
+  --config-file $CONFIG_PATH \
+  --stack-name "CrdDdb" \
+  --tags group=cruddur-ddb \
+  --no-execute-changeset \
+  --capabilities "CAPABILITY_NAMED_IAM"

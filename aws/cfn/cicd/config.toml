@@ -1,0 +1,11 @@
+[deploy]
+bucket = 'cfn-artifacts-cruddurmitchpuersten'
+region = 'ca-central-1'
+stack_name = 'CrdCicd'
+
+[parameters]
+ServiceStack = 'CrdSrvBackendFlask'
+ClusterStack = 'CrdCluster'
+GitHubBranch = 'prod'
+GithubRepo = 'AWS-Bootcamp-Cruddur'
+ArtifactBucketName = "codepipeline-cruddurmitchpuersten-artifacts"
