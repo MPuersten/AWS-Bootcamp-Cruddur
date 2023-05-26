@@ -1,0 +1,9 @@
+[deploy]
+bucket = 'cfn-artifacts-cruddurmitchpuersten'
+region = 'ca-central-1'
+stack_name = 'CrdFrontend'
+
+[parameters]
+CertificateArn = 'arn:aws:acm:us-east-1:299713107703:certificate/f16c6c61-afd3-445e-84c2-ad9cc32d5a11'
+WwwBucketName = 'www.cruddurmitchpuersten.ca'
+RootBucketName = 'cruddurmitchpuersten.ca'
