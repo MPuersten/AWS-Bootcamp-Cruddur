@@ -11,7 +11,7 @@ Parameters:
     Default: prod
   GithubRepo:
     Type: String
-    Default: 'omenking/aws-bootcamp-cruddur-2023'
+    Default: 'MitchP95/AWS-Bootcamp-Cruddur'
   ClusterStack:
     Type: String
   ServiceStack:
