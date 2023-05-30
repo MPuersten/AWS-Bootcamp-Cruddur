@@ -1,0 +1,9 @@
+[deploy]
+bucket = 'cfn-artifacts'
+region = 'ca-central-1'
+stack_name = 'CrdSyncRole'
+
+[parameters]
+GitHubOrg = 'MitchP95'
+RepositoryName = 'AWS-Bootcamp-Cruddur'
+OIDCProviderArn = ''
