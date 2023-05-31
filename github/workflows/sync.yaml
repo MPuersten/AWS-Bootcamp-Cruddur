@@ -8,11 +8,11 @@ on:
 
   jobs:
   build:
-    name: Statically Build Files
+    name: Statically Build Frontend Files
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.x]
+        node-version: [ 18.x ]
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -35,11 +35,11 @@ on:
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ADD_ARN
+          role-to-assume: arn:aws:iam::299713107703:role/CrdSyncRole-Role-1NMR85CU3TEAU
           aws-region: ca-central-1
       - uses: actions/checkout@v3
       - name: Set up Ruby
-        uses: ADD_USES
+        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
           ruby-version: '3.1'
       - name: Install dependencies
