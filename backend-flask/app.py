@@ -221,11 +221,6 @@ def data_create_message():
       return {}, 401
       #unauthenticated
 
-
-  
-
-  
-
 @app.route("/api/activities/home", methods=['GET'])
 # @xray_recorder.capture('activities_home')
 def data_home():
@@ -274,15 +269,23 @@ def data_search():
 @app.route("/api/activities", methods=['POST','OPTIONS'])
 @cross_origin()
 def data_activities():
-  user_handle  = 'MitchP'
-  message = request.json['message']
-  ttl = request.json['ttl']
-  model = CreateActivity.run(message, user_handle, ttl)
-  if model['errors'] is not None:
-    return model['errors'], 422
-  else:
-    return model['data'], 200
-  return
+  access_token = extract_access_token(request.headers)
+
+  try:
+    claims = cognito_jwt_token.verify(access_token)
+    cognito_user_id = claims['sub']
+    message = request.json['message']
+    ttl = request.json['ttl']
+    model = CreateActivity.run(message, cognito_user_id, ttl)
+    if model['errors'] is not None:
+        return model['errors'], 422
+    else:
+        return model['data'], 200
+
+  except TokenVerifyError as e:
+      app.logger.debug('unauthenticated')
+      return {}, 401
+      #unauthenticated
 
 @app.route("/api/activities/<string:activity_uuid>", methods=['GET'])
 # @xray_recorder.capture('activities_show')
