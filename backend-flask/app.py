@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request, after_this_request
+from flask import request, after_this_request, g
 from flask_cors import CORS, cross_origin
 import os
 import sys
