@@ -9,3 +9,4 @@ ClusterStack = 'CrdCluster'
 GitHubBranch = 'prod'
 GithubRepo = 'MitchP95/AWS-Bootcamp-Cruddur'
 ArtifactBucketName = "codepipeline-cruddurmitchpuersten-artifacts"
+BuildSpec = 'backend-flask/buildspec.yml'
