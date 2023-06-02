@@ -4,6 +4,13 @@ from flask_cors import CORS, cross_origin
 import os
 import sys
 
+from lib.rollbar import init_rollbar
+from lib.xray import init_xray
+from lib.honeycomb import init_honeycomb
+from lib.cors import init_cors
+from lib.cognito_jwt_token import jwt_required
+from lib.cloudwatch import init_cloudwatch
+
 from services.users_short import *
 from services.home_activities import *
 from services.notifications_activities import *
@@ -17,105 +24,14 @@ from services.create_message import *
 from services.show_activity import *
 from services.update_profile import *
 
-# HoneyComb -----
-from opentelemetry import trace
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-from opentelemetry.instrumentation.requests import RequestsInstrumentor
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
-
-# X-RAY -----
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
-
-# CloudWatch Logs -----
-import watchtower
-import logging
-from time import strftime
-
-# Rollbar -----
-import os
-import rollbar
-import rollbar.contrib.flask
-from flask import got_request_exception, g
-
-# Cognito -----
-from lib.cognito_jwt_token import jwt_required
-
-# Configuring Logger to Use CloudWatch
-# LOGGER = logging.getLogger(__name__)
-# LOGGER.setLevel(logging.DEBUG)
-# console_handler = logging.StreamHandler()
-# cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
-# LOGGER.addHandler(console_handler)
-# LOGGER.addHandler(cw_handler)
-# LOGGER.info('Test Log')
-
-# HoneyComb -----
-# Initialize tracing and an exporter that can send data to Honeycomb
-provider = TracerProvider()
-processor = BatchSpanProcessor(OTLPSpanExporter())
-provider.add_span_processor(processor)
-
-# Show console log (OTEL)
-simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
-provider.add_span_processor(simple_processor)
-
-# X-RAY -----
-# xray_url = os.getenv("AWS_XRAY_URL")
-# xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
-
-trace.set_tracer_provider(provider)
-tracer = trace.get_tracer(__name__)
-
 app = Flask(__name__)
 
-# X-RAY -----
-# XRayMiddleware(app, xray_recorder)
-
-# HoneyComb -----
-# Initialize automatic instrumentation with Flask
-FlaskInstrumentor().instrument_app(app)
-RequestsInstrumentor().instrument()
-
-# Rollbar -----
-# @app.before_first_request
-# def init_rollbar():
-#     """init rollbar module"""
-#     rollbar.init(
-#         # access token
-#         '92fc18e02730460eb8049aed008db783',
-#         # environment name
-#         'production',
-#         # server root directory, makes tracebacks prettier
-#         root=os.path.dirname(os.path.realpath(__file__)),
-#         # flask already sets up logging
-#         allow_logging_basic_config=False)
-
-#     # send exceptions from `app` to rollbar, using flask's signal system.
-#     got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
-
-frontend = os.getenv('FRONTEND_URL')
-backend = os.getenv('BACKEND_URL')
-origins = [frontend, backend]
-cors = CORS(
-  app, 
-  resources={r"/api/*": {"origins": origins}},
-  headers=['Content-Type', 'Authorization'],
-  expose_headers="Authorization",
-  methods="OPTIONS,GET,HEAD,POST"
-)
-
-# CloudWatch Logs -----
-# @app.after_request
-# def after_request(response):
-#     app.logger.debug('RESPONSE HEADERS')
-#     app.logger.debug(response.headers)
-#     # timestamp = strftime('[%Y-%b-%d %H:%M]')
-#     # LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
-#     return response
+init_xray(app)
+with app.app_context():
+  init_rollbar(app)
+  
+init_honeycomb(app)
+init_cors(app)
 
 # @app.route('/rollbar/test')
 # def rollbar_test():
