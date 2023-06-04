@@ -62,5 +62,5 @@ def load(app):
     @jwt_required()
     def data_activities_reply(activity_uuid):
         message = request.json['message']
-        model = CreateReply.run(message, g.cognito_user_id)
+        model = CreateReply.run(message, g.cognito_user_id, activity_uuid)
         return return_model(model)

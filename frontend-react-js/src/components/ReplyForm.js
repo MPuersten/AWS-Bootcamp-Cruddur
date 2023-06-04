@@ -2,7 +2,6 @@ import './ReplyForm.css';
 import React from "react";
 import process from 'process';
 import getAccessToken from '../lib/CheckAuth'
-
 import ActivityContent  from '../components/ActivityContent';
 
 export default function ReplyForm(props) {
@@ -18,9 +17,12 @@ export default function ReplyForm(props) {
   const onsubmit = async (event) => {
     event.preventDefault();
     try {
-      const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/${props.activity.uuid}/reply`
-      await getAccessToken()
-      const access_token = localStorage.getItem("access_token")
+      const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/${props.activity.uuid}/reply`;
+      await getAccessToken();
+      const access_token = localStorage.getItem("access_token");
+
+      console.log('access token: ', access_token);
+      console.log('activity_uuid: ', props.activity.uuid);
 
       const res = await fetch(backend_url, {
         method: "POST",
@@ -42,6 +44,7 @@ export default function ReplyForm(props) {
         let found_activity = activities_deep_copy.find(function (element) {
           return element.uuid ===  props.activity.uuid;
         });
+        console.log('found activity: ',  found_activity)
         found_activity.replies.push(data)
 
         props.setActivities(activities_deep_copy);
