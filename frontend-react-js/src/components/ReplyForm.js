@@ -23,9 +23,6 @@ export default function ReplyForm(props) {
       await getAccessToken();
       const access_token = localStorage.getItem("access_token");
 
-      console.log('access token: ', access_token);
-      console.log('activity_uuid: ', props.activity.uuid);
-
       const res = await fetch(backend_url, {
         method: "POST",
         headers: {
