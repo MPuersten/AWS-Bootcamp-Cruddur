@@ -1,6 +1,6 @@
 from lib.db import db
 
-class ReplyToActivityUuidToStringMigration(Migration):
+class ReplyToActivityUuidStringMigration:
   def migrate_sql():
     data = """
     ALTER TABLE activities DROP COLUMN reply_to_activity_uuid;
@@ -14,10 +14,10 @@ class ReplyToActivityUuidToStringMigration(Migration):
     """
     return data
   def migrate():
-    db.query_commit(ReplyToActivityUuidToStringMigration.migrate_sql(),{
+    db.query_commit(ReplyToActivityUuidStringMigration.migrate_sql(),{
     })
   def rollback():
-    db.query_commit(ReplyToActivityUuidToStringMigration.rollback_sql(),{
+    db.query_commit(ReplyToActivityUuidStringMigration.rollback_sql(),{
     })
 
-migration = ReplyToActivityUuidToStringMigration
+migration = ReplyToActivityUuidStringMigration
