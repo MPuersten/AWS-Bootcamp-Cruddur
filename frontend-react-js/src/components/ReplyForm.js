@@ -52,12 +52,11 @@ export default function ReplyForm(props) {
         setMessage('')
         props.setPopped(false)
       } else {
+        setErrors(data)
         console.log(res)
       }
     } catch (err) {
-      setErrors({
-        'generic_500': "The server encountered an error."
-      })
+      setErrors([`generic_${res.status}`]);
       console.log(err);
     }
   }
