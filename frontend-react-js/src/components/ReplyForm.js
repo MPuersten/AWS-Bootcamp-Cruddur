@@ -83,9 +83,12 @@ export default function ReplyForm(props) {
 
   if (props.popped === true) {
     return (
-      <div className="reply_form_wrap" onClick={close}>
+      <div className="popup_form_wrap reply_popup" onClick={close}>
         <div className="popup_form">
           <div className="popup_heading">
+            <div className='popup_title'>
+              Reply to...
+            </div>
           </div>
           <div className="popup_content">
             <div className="activity_wrap">
