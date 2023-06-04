@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 from services.home_activities import *
 from services.notifications_activities import *
 from services.create_activity import *
+from services.create_reply import *
 from services.search_activities import *
 from services.show_activity import *
 
@@ -61,6 +62,5 @@ def load(app):
     @jwt_required()
     def data_activities_reply(activity_uuid):
         message = request.json['message']
-        ttl = request.json['ttl']
-        model = CreateReply.run(message, g.cognito_user_id, ttl)
+        model = CreateReply.run(message, g.cognito_user_id)
         return return_model(model)
