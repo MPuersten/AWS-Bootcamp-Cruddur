@@ -3,6 +3,7 @@ import React from "react";
 import process from 'process';
 import getAccessToken from '../lib/CheckAuth'
 import ActivityContent  from '../components/ActivityContent';
+import FormErrors from './FormErrors';
 
 export default function ReplyForm(props) {
   const [count, setCount] = React.useState(0);
@@ -104,6 +105,7 @@ export default function ReplyForm(props) {
                 <div className={classes.join(' ')}>{240-count}</div>
                 <button type='submit'>Reply</button>
               </div>
+              <FormErrors errors={errors}/>
             </form>
           </div>
         </div>
