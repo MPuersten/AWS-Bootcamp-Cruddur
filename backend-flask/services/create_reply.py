@@ -33,7 +33,7 @@ class CreateReply:
 
   def create_reply(cognito_user_id, activity_uuid, message):
     # use actitivities template since it's similar to what we need
-    sql = db.template('activities','create')
+    sql = db.template('activities','reply')
     uuid = db.query_commit(sql, {
       'cognito_user_id': cognito_user_id,
       'reply_to_activity_uuid': activity_uuid,
@@ -41,8 +41,8 @@ class CreateReply:
     })
     return uuid
 
-  def query_object_reply(uuid):
-    sql = db.template('reply','object')
+  def query_object_activity(uuid):
+    sql = db.template('activities','object')
     return db.query_object_json(sql, {
       'uuid': uuid
     })
