@@ -1,9 +1,9 @@
 import './SignupPage.css';
 import React from "react";
-import {ReactComponent as Logo} from '../components/svg/logo.svg';
+import {ReactComponent as Logo} from 'components/svg/logo.svg';
 import { Link } from "react-router-dom";
-
 import { Auth } from 'aws-amplify';
+import FormErrors from 'components/FormErrors';
 
 export default function SignupPage() {
 
@@ -50,11 +50,6 @@ export default function SignupPage() {
   }
   const password_onchange = (event) => {
     setPassword(event.target.value);
-  }
-
-  let el_errors;
-  if (errors){
-    el_errors = <div className='errors'>{errors}</div>;
   }
 
   return (
@@ -105,7 +100,7 @@ export default function SignupPage() {
               />
             </div>
           </div>
-          {el_errors}
+          <FormErrors errors={errors}/>
           <div className='submit'>
             <button type='submit'>Sign Up</button>
           </div>

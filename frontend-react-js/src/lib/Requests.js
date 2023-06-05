@@ -37,26 +37,26 @@ async function request(method,url,payload,options){
     } catch (err) {
       console.log('request catch',err)
       if (err instanceof Response) {
-          console.log('HTTP error detected:', err.status); // Here you can see the status.
+          console.log('HTTP error detected:', err.status);
           if (options.hasOwnProperty('setErrors')){
-            options.setErrors([`generic_${err.status}`]) // Just an example. Adjust it to your needs.
+            options.setErrors([`generic_${err.status}`]);
           }
       } else {
         if (options.hasOwnProperty('setErrors')){
-          options.setErrors([`generic_500`]) // For network errors or any other errors
+          options.setErrors([`generic_500`]);
         }
       }
     }
   }
 
-  export function post(url,payload,options){
-    request('POST',url,payload,options)
+  export function post(url, payload, options){
+    request('POST', url, payload, options)
   }
   
-  export function put(url,payload,options){
-    request('PUT',url,payload,options)
+  export function put(url, payload, options){
+    request('PUT', url, payload, options)
   }
   
-  export function get(url,options){
-    request('GET',url,null,options)
+  export function get(url, options){
+    request('GET', url, null, options)
   }

@@ -1,7 +1,7 @@
 import './ReplyForm.css';
 import React from "react";
 import process from 'process';
-import getAccessToken from '../lib/CheckAuth'
+import { post } from 'lib/Requests';
 import ActivityContent  from '../components/ActivityContent';
 import FormErrors from './FormErrors';
 
@@ -18,47 +18,28 @@ export default function ReplyForm(props) {
 
   const onsubmit = async (event) => {
     event.preventDefault();
-    try {
-      const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/${props.activity.uuid}/reply`;
-      await getAccessToken();
-      const access_token = localStorage.getItem("access_token");
 
-      const res = await fetch(backend_url, {
-        method: "POST",
-        headers: {
-          'Authorization': `Bearer ${access_token}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          activity_uuid: props.activity.uuid,
-          message: message
-        }),
-      });
-      let data = await res.json();
-      if (res.status === 200) {
-        // add activity to the feed
+    const url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/${props.activity.uuid}/reply`;
+    const payload = {
+      activity_uuid: props.activity.uuid,
+      message: message
+    };
+    const options = {
+      auth: true,
+      setErrors: setErrors,
+      success: function(data){
+        if (props.setReplies) {
+          props.setReplies(current => [data,...current]);
+        }
 
-        let activities_deep_copy = JSON.parse(JSON.stringify(props.activities))
-        let found_activity = activities_deep_copy.find(function (element) {
-          return element.uuid ===  props.activity.uuid;
-        });
-        console.log('found activity: ',  found_activity)
-        found_activity.replies.push(data)
-
-        props.setActivities(activities_deep_copy);
-        // reset and close the form
+        // reset and close
         setCount(0)
         setMessage('')
         props.setPopped(false)
-      } else {
-        setErrors(data)
-        console.log(res)
       }
-    } catch (err) {
-      setErrors([`generic_${res.status}`]);
-      console.log(err);
-    }
+    };
+
+    post(url, payload, options);
   }
 
   const textarea_onchange = (event) => {
