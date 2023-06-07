@@ -20,6 +20,7 @@ app = Flask(__name__)
 routes.activities.load(app)
 routes.general.load(app)
 routes.messages.load(app)
+routes.users.load(app)
 
 init_xray(app)
 init_honeycomb(app)

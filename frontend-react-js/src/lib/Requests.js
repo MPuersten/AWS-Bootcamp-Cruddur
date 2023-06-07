@@ -4,9 +4,8 @@ async function request(method,url,payload,options){
     if (options.hasOwnProperty('setErrors')){
       options.setErrors('');
     }
-    let res
+    let res;
     try {
-  
       const attrs = {
         method: method,
         headers: {

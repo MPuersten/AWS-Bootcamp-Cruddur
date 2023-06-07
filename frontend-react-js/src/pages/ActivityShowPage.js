@@ -29,6 +29,8 @@ export default function ActivityShowPage() {
 
   const loadData = async () => {
     const url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/@${params.handle}/status/${params.activity_uuid}`;
+    
+    console.log(`Loading ${url} with handle ${params.handle} and ${params.activity_uuid}`);
     const options = {
       auth: false,
       success: function(data){
