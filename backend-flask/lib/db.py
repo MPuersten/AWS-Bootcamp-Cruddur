@@ -59,7 +59,6 @@ class Db:
           return returning_id
 
     except Exception as err:
-      print ("ERROR******************************")
       self.print_sql_err(err)
 
   def query_value(self,sql,params={},verbose=True):

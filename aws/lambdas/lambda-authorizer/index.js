@@ -12,8 +12,6 @@ const jwtVerifier = CognitoJwtVerifier.create({
 });
 
 exports.handler = async (event) => {
-  console.log("request:", JSON.stringify(event, undefined, 2));
-
   const jwt = event.headers.authorization.replace(/^Bearer\s+/i, '');
   console.log("Received JWT:", jwt);
   try {

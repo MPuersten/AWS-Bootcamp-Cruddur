@@ -1,16 +1,17 @@
 import './App.css';
 import './components/Popup.css';
 
-import HomeFeedPage from './pages/HomeFeedPage';
-import UserFeedPage from './pages/UserFeedPage';
-import NotificationsFeedPage from './pages/NotificationsFeedPage';
-import SignupPage from './pages/SignupPage';
-import SigninPage from './pages/SigninPage';
-import RecoverPage from './pages/RecoverPage';
-import MessageGroupsPage from './pages/MessageGroupsPage';
-import MessageGroupPage from './pages/MessageGroupPage';
-import MessageGroupNewPage from './pages/MessageGroupNewPage';
-import ConfirmationPage from './pages/ConfirmationPage';
+import HomeFeedPage from 'pages/HomeFeedPage';
+import UserFeedPage from 'pages/UserFeedPage';
+import NotificationsFeedPage from 'pages/NotificationsFeedPage';
+import SignupPage from 'pages/SignupPage';
+import SigninPage from 'pages/SigninPage';
+import RecoverPage from 'pages/RecoverPage';
+import MessageGroupsPage from 'pages/MessageGroupsPage';
+import MessageGroupPage from 'pages/MessageGroupPage';
+import MessageGroupNewPage from 'pages/MessageGroupNewPage';
+import ConfirmationPage from 'pages/ConfirmationPage';
+import ActivityShowPage from 'pages/ActivityShowPage';
 import React from 'react';
 
 import {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "/@:handle",
     element: <UserFeedPage />
+  },
+  {
+    path: "/@:handle/status/:activity_uuid",
+    element: <ActivityShowPage />
   },
   {
     path: "/messages",
