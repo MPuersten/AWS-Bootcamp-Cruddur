@@ -46,7 +46,6 @@ export default function ProfileForm(props) {
   }
   const s3upload = async (event)=> {
     const file = event.target.files[0]
-    const preview_image_url = URL.createObjectURL(file)
     const fileparts = file.name.split('.')
     const extension = fileparts[fileparts.length-1]
     const presignedurl = await s3uploadkey(extension)
