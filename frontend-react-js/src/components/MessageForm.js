@@ -32,7 +32,6 @@ export default function ActivityForm(props) {
       auth: true,
       setErrors: setErrors,
       success: function(data){
-        console.log('data:',data)
         if (data.message_group_uuid) {
           // redirect to message group
           console.log('Redirecting...')
