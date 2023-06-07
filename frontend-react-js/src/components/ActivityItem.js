@@ -10,20 +10,6 @@ import ActivityActionShare  from '../components/ActivityActionShare';
 export default function ActivityItem(props) {
   const navigate = useNavigate();
 
-  let replies;
-  if (props.activity.replies) {
-    replies = <div className="replies">
-                {props.activity.replies.map(reply => {
-                return  <ActivityItem 
-                  setReplyActivity={props.setReplyActivity} 
-                  setPopped={props.setPopped} 
-                  key={reply.uuid} 
-                  activity={reply} 
-                  />
-                })}
-              </div>
-  }
-
   const click = (event) => {
     event.preventDefault()
     const url = `/@${props.activity.handle}/status/${props.activity.uuid}`
