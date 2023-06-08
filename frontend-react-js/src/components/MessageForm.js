@@ -23,9 +23,9 @@ export default function ActivityForm(props) {
     const url = `${process.env.REACT_APP_BACKEND_URL}/api/messages`;
     const payload = { 'message': message };
     if (params.handle) {
-      json.handle = params.handle
+      payload.handle = params.handle
     } else {
-      json.message_group_uuid = params.message_group_uuid
+      payload.message_group_uuid = params.message_group_uuid
     }
 
     const options = {
