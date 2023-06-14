@@ -1,7 +1,12 @@
 # Week 2 — Distributed Tracing
 
-All distributed tracing methods have been implemented and run.
+## Activities Performed
+- Instrumented Honeycomb for tracing with OpenTelemetry (OTEL)
+- Instrumented AWS X-Ray for tracing
+- Configured and added a custom CloudWatch logger
+- Configured and added integration with Rollbar for debugging
 
+All distributed tracing methods have been implemented and run.
 Particular interest in the simplicity and utility of Honeycomb drove some additional information and research for use in personal and professional projects.
 
 ## Honeycomb additional queries
