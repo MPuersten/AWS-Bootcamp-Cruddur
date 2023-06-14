@@ -22,16 +22,16 @@ The following environment variables are required to run the Gitpod developer env
 
 The `/journal` directory contains
 
-- [x] [Week 0](journal/week0.md)    Requires minor updates
-- [x] [Week 1](journal/week1.md)    Requires minor updates
-- [x] [Week 2](journal/week2.md)    Requires minor updates
-- [x] [Week 3](journal/week3.md)    Requires minor updates
-- [x] [Week 4](journal/week4.md)    Requires minor updates
-- [x] [Week 5](journal/week5.md)    Requires minor updates
-- [x] [Week 6](journal/week6.md)    Requires minor updates
-- [x] [Week 7](journal/week7.md)    Requires minor updates
-- [x] [Week 8](journal/week8.md)    Requires minor updates
-- [x] [Week 9](journal/week9.md)    Requires minor updates
-- [x] [Week 10](journal/week10.md)  Requires minor updates
-- [x] [Week 11](journal/week11.md)  Requires minor updates
-- [x] [Week X](journal/week12.md)   Requires minor updates
+- [x] [Week 0](journal/week0.md)  
+- [x] [Week 1](journal/week1.md)  
+- [x] [Week 2](journal/week2.md)  
+- [x] [Week 3](journal/week3.md)  
+- [x] [Week 4](journal/week4.md)  
+- [x] [Week 5](journal/week5.md)  
+- [x] [Week 6](journal/week6.md)  
+- [x] [Week 7](journal/week7.md)  
+- [x] [Week 8](journal/week8.md)  
+- [x] [Week 9](journal/week9.md)  
+- [x] [Week 10](journal/week10.md)
+- [x] [Week 11](journal/week11.md)
+- [x] [Week X](journal/week12(x).md) 
