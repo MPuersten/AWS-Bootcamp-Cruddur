@@ -11,6 +11,6 @@ The second portion continued to be challenging, but the utility of the CFN templ
 - Implemented static site hosting with S3 and CloudFront using CFN, hosted the Frontend
 
 ## Additional activites
-Re-usee the static hosting scripts to host a personal portfolio in an S3 bucket, distributed with CloudFront
+Re-used the static hosting scripts to host a personal portfolio in an S3 bucket, distributed with CloudFront
 
 [Mitchell Puersten Portfolio](https://mitchellpuersten.com)
