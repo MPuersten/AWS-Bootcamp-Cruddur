@@ -1,5 +1,13 @@
 # Week 4 — Postgres and RDS
 
+## Activities Performed
+- Created an RDS Postgres instance on AWS
+- Added Bash scripts for Postgres and RDS postgres interactions
+- Added db python scripts
+- Added SQL queries for use in scripts and backend
+- Added AWS Cognito trigger for Lambda to add user to Database
+- Added database insert for new activities
+
 ## RDS research and notes
 
 ### Subqueries (My Debugging Savior)
