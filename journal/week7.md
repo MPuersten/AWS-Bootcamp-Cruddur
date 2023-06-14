@@ -3,7 +3,7 @@ This week was conbined with week 6 in instructional videos and homework contribu
 
 ## Activities Performed
 - Purchased and managed Domain name cruddurmitchpuersten.ca in Route53
-- Created SSL certificate in ACM
+- Created SSL certificate in AWS Certificate Manager (ACM)
 - Created and attach record set for new domain for Frontend
 - Created and attach record set for new domain for Backend
 - Configured CORS to allow only permit traffic from our domain
