@@ -1,6 +1,15 @@
 # Week 6 — Deploying Containers
-
 This week was busy - I've added notes from research on deploying containers in AWS.
+
+## Activities Performed
+- Provisioned an ECS cluster in AWS Console
+- Created Task and Service definitions for deploying the Backend in ECS
+- Created Task and Service definitions for deploying the Frontend in ECS
+- Created an ECR repo and pushed a built image for the Flask (python) Backend
+- Created an ECR repo and pushed a built image for the React (js) Frontend
+- Deployed the Backend as a service to Fargate
+- Deployed the Frontend as a service to Fargate
+- Provisioned and configured and Application Load Balancer (ALB) for use with the FE and BE
 
 ## Notes:
 
