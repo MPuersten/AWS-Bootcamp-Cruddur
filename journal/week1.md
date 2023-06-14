@@ -1,6 +1,12 @@
 # Week 1 — App Containerization
 
-## Checklist
+## Activities Performed
+- Containerized the application (Docker compose, Frontend Dockerfile, Backend Dockerfile)
+- Created and documented Flask endpoint in the backend for notifications
+- Added Notifications Page (React) in the Frontend
+- Created and ran / smoke tested local Postgres container
+- Created and ran / smoke tested local DynamoDB container
+- Updated the .gitpod.yml file to start the environment with most services prepped for use
 
 ### Application Dockerization
 
