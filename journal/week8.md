@@ -1,5 +1,17 @@
 # Week 8 — Serverless Image Processing
 
+## Activities Performed
+- Implemented the CDK stack to prep for user avatars
+- Setup avatars to be served from S3 via CloudFront
+- Implemented User Profile page in Frontend (React)
+- Implemented User Profile Form component in Frontend (React)
+- Implemented SQL migrations script
+- Implemented bio migration for adding and rolling back user table bio in PostgreSQL
+- Performed Presigned URL generation with Ruby in AWS Lambda
+- Setup an HTTP API Gateway with the Ruby Lambda Authorizer
+- Created a JWT Lambda layer
+- Rendered Avatars in the Frontend Application via CloudFront
+
 ## Setup
 
 To setup the developement environment run the following:
