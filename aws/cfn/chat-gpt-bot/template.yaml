@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda function interacting with ChatGPT API and storing responses in an RDS database
+
+Resources:
+  OpenAIApiCredentials:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: openAIApiCredentials
+      Description: OpenAI API credentials
+      SecretString:
+        Fn::Sub: |
+          {
+            "openAiOrganization": "${OpenAiOrganization}",
+            "openAiSecretApiKey": "${OpenAiSecretApiKey}"
+          }
+      GenerateSecretString:
+        SecretStringTemplate: '{"openAiOrganization": "", "openAiSecretApiKey": ""}'
+        GenerateStringKey: "password"
+        PasswordLength: 30
+        ExcludePunctuation: true
+
+  ChatGPTLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: dotnet6.0
+      CodeUri: ./src/  # Path to the directory containing your .NET project
+      Handler: YourNamespace.YourClass::YourNamespace.YourClass.YourMethod
+      Policies:
+        - AWSLambdaFullAccess
+        - AWSXRayDaemonWriteAccess
+        - AWSKeyManagementServicePowerUser
+        - SecretManagerReadWrite
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - 'logs:CreateLogGroup'
+                - 'logs:CreateLogStream'
+                - 'logs:PutLogEvents'
+              Resource: 'arn:aws:logs:*:*:*'
+            - Effect: Allow
+              Action:
+                - 'secretsmanager:GetSecretValue'
+              Resource: !Ref OpenAIApiCredentials
+      Events:
+        Schedule:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 day)  # runs once every day
+      Environment:
+        Variables:
+          OPENAI_SECRET_NAME: !Ref OpenAIApiCredentials
+          DB_CONNECTION_STRING: your-db-connection-string  # replace with your db connection string
+
+Outputs:
+  ChatGPTLambdaFunction:
+    Description: The ARN of the ChatGPT Lambda function
+    Value: !GetAtt ChatGPTLambdaFunction.Arn
+    Export:
+      Name: ChatGPTLambdaFunctionArn
+  OpenAIApiCredentials:
+    Description: The ARN of the OpenAI API credentials secret
+    Value: !Ref OpenAIApiCredentials
+    Export:
+      Name: OpenAIApiCredentialsArn
