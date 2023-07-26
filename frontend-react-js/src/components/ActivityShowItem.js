@@ -28,6 +28,8 @@ export default function ActivityShowItem(props) {
         extension: 'none'
       }
 
+      console.log('Built objects.');
+
       const res = await fetch(gateway_url, {
         method: "POST",
         body: JSON.stringify(json),
@@ -38,6 +40,9 @@ export default function ActivityShowItem(props) {
           'Content-Type': 'application/json'
         }
       })
+
+      console.log('Fetched results.');
+
       let data = await res.json();
       if (res.status === 200) {
         return data.url
@@ -48,15 +53,13 @@ export default function ActivityShowItem(props) {
       console.log(err);
     }
   }
-  const activityUpload = async (event)=> {
+  const activityUpload = async ()=> {
     const presignedurl = await activityUploadKey()
     try {
       const res = await fetch(presignedurl, {
         method: "PUT",
-        body: file,
-        headers: {
-          'Content-Type': file.type
-      }})
+        body: 'Your string content', // Insert the string you want to upload
+      })
       if (res.status === 200) {
         console.log('upload successful.');
       } else {
@@ -66,6 +69,7 @@ export default function ActivityShowItem(props) {
       console.log(err);
     }
   }
+  
 
   const handleQuery = (event) => {
     event.preventDefault();
