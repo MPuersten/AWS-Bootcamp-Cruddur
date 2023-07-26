@@ -6,6 +6,7 @@ import ActivityActionReply  from 'components/ActivityActionReply';
 import ActivityActionRepost  from 'components/ActivityActionRepost';
 import ActivityActionLike  from 'components/ActivityActionLike';
 import ActivityActionShare  from 'components/ActivityActionShare';
+import ActivityActionQuery from './ActivityActionQuery';
 
 export default function ActivityItem(props) {
   const navigate = useNavigate();
@@ -14,6 +15,14 @@ export default function ActivityItem(props) {
     event.preventDefault()
     const url = `/@${props.activity.handle}/status/${props.activity.uuid}`
     navigate(url)
+    return false;
+  }
+
+  // Here's the new handleQuery function
+  const handleQuery = (event) => {
+    event.preventDefault()
+    // Add any functionality you want for the query button here
+    console.log('Query button clicked!');
     return false;
   }
 
@@ -30,6 +39,7 @@ export default function ActivityItem(props) {
           <ActivityActionRepost activity_uuid={props.activity.uuid} count={props.activity.reposts_count}/>
           <ActivityActionLike activity_uuid={props.activity.uuid} count={props.activity.likes_count}/>
           <ActivityActionShare activity_uuid={props.activity.uuid} />
+          <button onClick={handleQuery} className='activity-query'>Activity Review</button>
         </div>
       </div>
     </div>

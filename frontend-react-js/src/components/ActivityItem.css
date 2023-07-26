@@ -72,3 +72,20 @@
   fill: rgb(255, 0, 64);
 }
 
+.activity-query {
+  background-color: rgb(255, 0, 64);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+
+  padding: 8px;
+  margin: 5px;
+  margin-top: 12px;
+  margin-bottom: 2px;
+
+}
+
+.activity-query:hover {
+  cursor: pointer;
+}
