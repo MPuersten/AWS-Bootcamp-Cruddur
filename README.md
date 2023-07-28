@@ -1,8 +1,14 @@
 # FREE AWS Cloud Project Bootcamp
 
-## Mitch Puersten
-
 ![](https://codebuild.ca-central-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidFRTQStZUjJ3SmM4NVFVZ0ZsUlNUQjhvZlVndkdZNDBUTGtzRzRwRWZIMDF0cHBicjJETU5KMENtSlV5SGQ2MFpwOXVOMDdoZDV3VU9EOVhrYjNtZGFRPSIsIml2UGFyYW1ldGVyU3BlYyI6IkxGSHFIUkNraTNTcS83Z0giLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
+
+## Project Status
+
+Since the project runs on AWS with multiple services the backend of the project has been wound down. 
+
+The frontend remains up and active - feel free to check it out!
+
+[Cruddur (Mitchell Puersten)](https://cruddurmitchpuersten.ca/)
 
 - Application: Cruddur
 - Cohort: 2023-A1
@@ -12,11 +18,6 @@ This is forked from the starting codebase that will be used in the FREE AWS Clou
 ![Cruddur Graphic](_docs/assets/cruddur-banner.jpg)
 
 ![Cruddur Screenshot](_docs/assets/cruddur-screenshot.png)
-
-## Required Environment Variables
-
-The following environment variables are required to run the Gitpod developer environment:
-- **_Coming Soon_**
 
 ## Journaling Homework
 
