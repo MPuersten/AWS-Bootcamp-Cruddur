@@ -4,9 +4,9 @@
 
 ## Project Status
 
-Since the project runs on AWS with multiple services the backend of the project has been wound down. 
+Since the project runs on AWS with multiple services the project has been wound down. 
 
-The frontend remains up and active - feel free to check it out!
+Feel free to check out the project by hosting it locally in Gitpod - it's set up to seamlessly run the stack after opening.
 
 [Cruddur (Mitchell Puersten)](https://cruddurmitchpuersten.ca/)
 
